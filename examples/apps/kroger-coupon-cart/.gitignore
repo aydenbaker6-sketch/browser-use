@@ -1,0 +1,4 @@
+.env
+.venv/
+kroger_data/
+__pycache__/
