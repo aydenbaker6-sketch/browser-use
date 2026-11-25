@@ -121,6 +121,12 @@ async def main() -> int:
 	)
 	site: KrogerSite | None = None
 	try:
+		try:
+			await api.app_token()
+		except (RuntimeError, AssertionError) as e:
+			print(f'\nKroger did not accept the Client ID / Client Secret in .env:\n  {e}')
+			print('Open .env in Notepad, paste both values again with the "Copy" buttons on developer.kroger.com, save, and rerun.')
+			return 2
 		if args.reuse_data:
 			saved = _read_json(coupons_file)
 			if not saved:
